@@ -14,4 +14,30 @@ class Film extends Model
     protected $casts = [
         'special_features' => 'array',
     ];
+
+    /**
+     * Get the language associated with the film.
+     */
+    public function language()
+    {
+        return $this->belongsTo(Language::class);
+    }
+
+    /**
+     * A film may have multiple likes.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function likes() {
+        return $this->hasMany(FilmLike::class);
+    }
+
+    /**
+     * A film may have multiple dislikes.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function dislikes() {
+        return $this->hasMany(FilmDislike::class);
+    }
 }

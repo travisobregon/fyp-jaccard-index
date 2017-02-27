@@ -17,4 +17,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::get('home', 'HomeController@index');
+
+Route::resource('films', 'FilmsController');
+
+Route::post('likes', 'LikesController@store')->name('likes.store');
+Route::post('dislikes', 'DislikesController@store')->name('dislikes.store');

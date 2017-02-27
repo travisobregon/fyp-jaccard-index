@@ -11,9 +11,11 @@
         <p>You are logged in!</p>
     </div>
 
+    <a href="{{ route('films.index') }}">Films</a>
+
     @push('scripts')
         <script>
-            $('.message .close').on('click', function () {
+            $('.message .close').click(function () {
                 $(this).parent().remove();
             });
         </script>

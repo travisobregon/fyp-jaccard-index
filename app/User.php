@@ -35,4 +35,22 @@ class User extends Authenticatable
     protected $casts = [
         'is_staff' => 'boolean',
     ];
+
+    /**
+     * A user may like multiple films.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function likes() {
+        return $this->hasMany(FilmLike::class);
+    }
+
+    /**
+     * A user may dislike multiple films.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function dislikes() {
+        return $this->hasMany(FilmDislike::class);
+    }
 }

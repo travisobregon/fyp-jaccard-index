@@ -1,3 +1,22 @@
 div.ui.main.content.container {
   margin-top: 60px;
 }
+
+button.none {
+  background: none;
+  border: 0;
+  padding: 0;
+  outline: none;
+}
+
+button.none i {
+  margin-right: 0;
+}
+
+.is-flex {
+  display: flex !important;
+}
+
+.flex {
+  flex: 1;
+}
