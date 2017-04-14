@@ -17,6 +17,8 @@ class Film extends Model
 
     /**
      * Get the language associated with the film.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function language()
     {

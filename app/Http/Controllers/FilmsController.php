@@ -3,9 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Film;
+use App\Recommender\Engine;
+use App\Recommender\Suggestion;
 
 class FilmsController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,8 +26,17 @@ class FilmsController extends Controller
     public function index()
     {
         $films = Film::with('language', 'likes', 'dislikes')->orderBy('title', 'asc')->simplePaginate(20);
+        $suggestions = Suggestion::forUser()->first();
 
-        return view('films.index', compact('films'));
+        if ($suggestions) {
+            $suggestions = collect($suggestions->films)
+                ->sortBy('weight')
+                ->map(function ($suggestion) {
+                    return Film::find($suggestion['film']);
+                });
+        }
+
+        return view('films.index', compact('films', 'suggestions'));
     }
 
     /**

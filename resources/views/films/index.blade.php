@@ -1,6 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
+    @if ($suggestions && $suggestions->count())
+        <h1 class="ui header">Suggestions</h1>
+
+        <div class="ui celled list">
+            @foreach ($suggestions as $film)
+                <div class="item">{{ $film->title }}</div>
+            @endforeach
+        </div>
+    @endif
+
+    <h1 class="ui header">Films</h1>
+
     <div class="ui divided items">
         @foreach ($films as $film)
             <div class="item">
@@ -15,7 +27,7 @@
                                 <input type="hidden" name="film_id" value="{{ $film->id }}">
 
                                 <button type="submit" class="none">
-                                    <i class="thumbs {{ Auth::user()->dislikes->contains('film_id', $film->id) ? '' : 'outline' }} down icon"></i>
+                                    <i class="red thumbs {{ Auth::user()->dislikes->contains('film_id', $film->id) ? '' : 'outline' }} down icon"></i>
                                     {{ $film->dislikes->count() }}
                                 </button>
                             </form>
@@ -26,7 +38,7 @@
                                 <input type="hidden" name="film_id" value="{{ $film->id }}">
 
                                 <button type="submit" class="none">
-                                    <i class="thumbs {{ Auth::user()->likes->contains('film_id', $film->id) ? '' : 'outline' }} up icon"></i>
+                                    <i class="blue thumbs {{ Auth::user()->likes->contains('film_id', $film->id) ? '' : 'outline' }} up icon"></i>
                                     {{ $film->likes->count() }}
                                 </button>
                             </form>
