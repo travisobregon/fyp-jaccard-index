@@ -12,12 +12,13 @@
     </div>
 
     <a href="{{ route('films.index') }}">Films</a>
-
-    @push('scripts')
-        <script>
-            $('.message .close').click(function () {
-                $(this).parent().remove();
-            });
-        </script>
-    @endpush
+    <a href="/suggestions">Suggestions</a>
 @endsection
+
+@push('scripts')
+    <script>
+        $('.message .close').click(function () {
+            $(this).parent().remove();
+        });
+    </script>
+@endpush

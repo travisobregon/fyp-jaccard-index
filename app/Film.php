@@ -42,4 +42,13 @@ class Film extends Model
     public function dislikes() {
         return $this->hasMany(FilmDislike::class);
     }
+
+    /**
+     * A film may have multiple ratings.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function ratings() {
+        return $this->hasMany(Rating::class);
+    }
 }

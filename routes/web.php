@@ -21,5 +21,8 @@ Route::get('home', 'HomeController@index');
 
 Route::resource('films', 'FilmsController');
 
-Route::post('likes', 'LikesController@store')->name('likes.store');
-Route::post('dislikes', 'DislikesController@store')->name('dislikes.store');
+Route::get('suggestions', 'SuggestionsController@index');
+
+Route::post('ratings', 'RatingsController@store');
+
+Route::get('metrics', 'MetricsController');

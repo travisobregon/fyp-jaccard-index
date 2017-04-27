@@ -24,6 +24,7 @@ class CreateFilmsTable extends Migration
             $table->smallInteger('length');
             $table->decimal('replacement_cost', 5, 2)->default(19.99);
             $table->enum('rating', ['G', 'PG', 'PG-13', 'R', 'NC-17'])->default('G');
+            $table->unsignedTinyInteger('stars')->default(0);
             $table->json('special_features')->nullable();
             $table->timestamps();
 

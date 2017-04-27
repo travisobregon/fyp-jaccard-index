@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Film;
-use App\Recommender\Engine;
-use App\Recommender\Suggestion;
 
 class FilmsController extends Controller
 {
@@ -25,18 +23,9 @@ class FilmsController extends Controller
      */
     public function index()
     {
-        $films = Film::with('language', 'likes', 'dislikes')->orderBy('title', 'asc')->simplePaginate(20);
-        $suggestions = Suggestion::forUser()->first();
+        $films = Film::with('language', 'ratings')->orderBy('title', 'asc')->simplePaginate(20);
 
-        if ($suggestions) {
-            $suggestions = collect($suggestions->films)
-                ->sortBy('weight')
-                ->map(function ($suggestion) {
-                    return Film::find($suggestion['film']);
-                });
-        }
-
-        return view('films.index', compact('films', 'suggestions'));
+        return view('films.index', compact('films'));
     }
 
     /**
@@ -52,10 +41,9 @@ class FilmsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
         //
     }

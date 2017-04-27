@@ -1,6 +1,6 @@
 <div class="ui fixed inverted menu">
     <div class="ui container">
-        <a href="#" class="header item">
+        <a href="/home" class="header item">
             {{ config('app.name', 'Laravel') }}
         </a>
 

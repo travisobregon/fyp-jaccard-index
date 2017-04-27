@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Recommender;
+namespace App;
 
 use App\FilmDislike;
 use App\FilmLike;

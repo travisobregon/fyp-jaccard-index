@@ -53,4 +53,38 @@ class User extends Authenticatable
     public function dislikes() {
         return $this->hasMany(FilmDislike::class);
     }
+
+    /**
+     * Determine whether a user rated the given film.
+     *
+     * @param Film $film
+     * @return bool
+     */
+    public function rated(Film $film)
+    {
+        return $film->ratings->contains(function ($rating) {
+            return auth()->id() === $rating->user_id;
+        });
+    }
+
+    /**
+     * Get the stars the authenticated user gave for the given film.
+     *
+     * @param Film $film
+     * @return int
+     */
+    public function ratingFor(Film $film)
+    {
+        return $film->ratings()->where('user_id', auth()->id())->first()->stars;
+    }
+
+    /**
+     * A user may rate multiple films.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class);
+    }
 }

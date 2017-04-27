@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFilmDislikesTable extends Migration
+class CreateRatingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,19 @@ class CreateFilmDislikesTable extends Migration
      */
     public function up()
     {
-        Schema::create('film_dislikes', function (Blueprint $table) {
+        Schema::create('ratings', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('film_id');
             $table->unsignedInteger('user_id');
+            $table->unsignedInteger('film_id');
+            $table->unsignedTinyInteger('stars');
             $table->timestamps();
-
-            $table->foreign('film_id')
-                  ->references('id')->on('films')
-                  ->onDelete('cascade');
 
             $table->foreign('user_id')
                   ->references('id')->on('users')
+                  ->onDelete('cascade');
+
+            $table->foreign('film_id')
+                  ->references('id')->on('films')
                   ->onDelete('cascade');
         });
     }
@@ -36,6 +37,6 @@ class CreateFilmDislikesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('film_dislikes');
+        Schema::dropIfExists('ratings');
     }
 }
