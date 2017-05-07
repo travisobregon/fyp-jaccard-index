@@ -11,8 +11,11 @@
         <p>You are logged in!</p>
     </div>
 
-    <a href="{{ route('films.index') }}">Films</a>
-    <a href="/suggestions">Suggestions</a>
+    <div class="is-flex">
+        <a class="flex" href="{{ route('films.index') }}">Films</a>
+        <a class="flex" href="/suggestions">Suggestions</a>
+        <a href="/metrics">Metrics</a>
+    </div>
 @endsection
 
 @push('scripts')
